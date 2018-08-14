@@ -1,0 +1,15 @@
+<template>
+  <view>会员</view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class MemberIndex extends wepy.page {
+  data = {}
+  methods = {}
+  onLoad() {}
+}
+</script>
+
+<style lang="css">
+</style>

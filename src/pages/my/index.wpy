@@ -1,0 +1,50 @@
+<template>
+  <view class="header">
+    <view class="header_content">
+      <view class="avatarUrl">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <view class="nickName" style="color: #FFF;">
+        <open-data type="userNickName"></open-data>
+      </view>
+    </view>
+  </view>
+  <view>我的</view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class MyIndex extends wepy.page {
+  data = {}
+  methods = {}
+  onLoad() {}
+}
+</script>
+
+<style lang="css">
+.header {
+  background: #0080FF;
+  height: 260rpx;
+  width: 100%;
+}
+.header_content {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 48rpx;
+}
+.avatarUrl {
+  width: 122rpx;
+  height: 122rpx;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.nickName {
+  font-size: 30rpx;
+  padding-top: 15rpx;
+}
+</style>

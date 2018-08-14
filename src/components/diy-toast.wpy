@@ -1,0 +1,64 @@
+<template>
+  <view class="diy-toast" wx:if="{{showblur}}">
+    <view class="diy-toast__icon">!</view><view>{{diyToast.title}}</view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+
+export default class diyToast extends wepy.component {
+  props = {}
+  components = {}
+  data = {
+    showblur: false,
+    diyToast: {}
+  }
+  methods = {
+    async toastBlur(data) {
+      let self = this
+      self.diyToast.title = data.title
+      self.showblur = true
+
+      // 启动以1s为步长的倒计时
+      var intervalr = setInterval(() => {
+      }, 1000)
+      // 停止倒计时
+      setTimeout(function() {
+        clearInterval(intervalr)
+        self.showblur = false
+        self.$apply()
+      }, 2000)
+    }
+  }
+}
+</script>
+<style lang="css">
+/* toast警告弹框 */
+.diy-toast__icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 auto;
+  padding: 12px 15px;
+  font-size: 38px;
+  text-align: center;
+}
+.diy-toast {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.5em;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 10px 18px;
+  text-align: center;
+  border-radius: 4px;
+  z-index: 100;
+}
+</style>

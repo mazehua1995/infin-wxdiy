@@ -1,0 +1,103 @@
+<style lang="less">
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+</style>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+
+import { setStore } from 'wepy-redux'
+import configStore from './store'
+
+const store = configStore()
+setStore(store)
+
+export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/home/index',
+      'pages/member/index',
+      'pages/my/index',
+      'pages/shopping/index'
+    ],
+    window: {
+      backgroundTextStyle: 'dark',
+      navigationBarBackgroundColor: '#0080FF',
+      navigationBarTitleText: '小程序',
+      navigationBarTextStyle: 'white',
+      enablePullDownRefresh: true
+    },
+    tabBar: {
+      'color': '#b2b2b2',
+      'selectedColor': '#0080FF',
+      list: [{
+        'pagePath': 'pages/home/index',
+        'text': '首页',
+        'iconPath': 'images/TabBar/home.png',
+        'selectedIconPath': 'images/TabBar/home_selected.png'
+      }, {
+        'pagePath': 'pages/member/index',
+        'text': '产品',
+        'iconPath': 'images/TabBar/member.png',
+        'selectedIconPath': 'images/TabBar/member_selected.png'
+      }, {
+        'pagePath': 'pages/shopping/index',
+        'text': '订单',
+        'iconPath': 'images/TabBar/shopping.png',
+        'selectedIconPath': 'images/TabBar/shopping_selected.png'
+      }, {
+        'pagePath': 'pages/my/index',
+        'text': '我的',
+        'iconPath': 'images/TabBar/my.png',
+        'selectedIconPath': 'images/TabBar/my_selected.png'
+      }]
+    }
+  }
+
+  globalData = {
+    userInfo: null
+  }
+
+  constructor () {
+    super()
+    this.use('requestfix')
+  }
+
+  onLaunch() {
+    this.testAsync()
+  }
+
+  sleep (s) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('promise resolved')
+      }, s * 1000)
+    })
+  }
+
+  async testAsync () {
+    const data = await this.sleep(3)
+    console.log(data)
+  }
+
+  getUserInfo(cb) {
+    const that = this
+    if (this.globalData.userInfo) {
+      return this.globalData.userInfo
+    }
+    wepy.getUserInfo({
+      success (res) {
+        that.globalData.userInfo = res.userInfo
+        cb && cb(res.userInfo)
+      }
+    })
+  }
+}
+</script>
