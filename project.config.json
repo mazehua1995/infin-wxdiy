@@ -1,0 +1,15 @@
+{
+	"description": "A WePY project",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"appid": "wx7eded8ccb6c8f08f",
+	"projectname": "infin-wxdiy",
+	"miniprogramRoot": "./dist",
+	"condition": {}
+}

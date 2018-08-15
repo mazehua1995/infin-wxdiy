@@ -1,0 +1,34 @@
+<template>
+  <view>首页</view>
+  <view @tap="blurMy" style="color: #0080FF;">跳转到“我的”页面</view>
+  <view @tap="toast" style="color: #0080FF;">警告弹框</view>
+  <diyToast1></diyToast1>
+</template>
+<script>
+import wepy from 'wepy'
+import diyToast from '../../components/diy-toast'
+export default class HomeIndex extends wepy.page {
+  config = {
+    navigationBarTitleText: '首页'
+  }
+  components = {
+    diyToast1: diyToast
+  };
+  data = {}
+  methods = {
+    blurMy() {
+      console.log('我要跳到my/index页面去')
+      wepy.switchTab({
+        url: '../my/index'
+      })
+    },
+    toast() {
+      let self = this
+      self.$invoke('diyToast1', 'toastBlur', {title: '警告'})
+    }
+  }
+  onLoad() {}
+}
+</script>
+<style lang="css">
+</style>
